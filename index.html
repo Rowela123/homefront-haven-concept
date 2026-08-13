@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Homefront Haven — Safe homes for veterans and survivors</title>
+<meta name="description" content="Homefront Haven builds affordable, permanent housing for homeless veterans and for women and children escaping abuse." />
+<style>
+  :root{
+    --bg:#faf6f0; --surface:#ffffff; --ink:#22312e; --muted:#5c6b66;
+    --line:#e7ded2; --green:#20655a; --green-dk:#184e46; --sand:#efe7d9;
+    --amber:#c2703d; --amber-dk:#a95c2d; --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;line-height:1.15;letter-spacing:-.01em;margin:0}
+  h1{font-size:clamp(2.2rem,5vw,3.4rem)}
+  h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+  h3{font-size:1.2rem}
+  p{margin:0 0 1rem;color:var(--muted)}
+  a{color:var(--green);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.95rem;
+    padding:13px 24px;border-radius:4px;border:1.5px solid transparent;cursor:pointer;transition:.15s}
+  .btn-donate{background:var(--amber);color:#fff}
+  .btn-donate:hover{background:var(--amber-dk);text-decoration:none}
+  .btn-primary{background:var(--green);color:#fff}
+  .btn-primary:hover{background:var(--green-dk);text-decoration:none}
+  .btn-outline{background:transparent;border-color:var(--green);color:var(--green)}
+  .btn-outline:hover{background:var(--green);color:#fff;text-decoration:none}
+
+  /* Safety bar */
+  .safety{background:var(--green-dk);color:#eaf1ef;font-size:.86rem}
+  .safety .container{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+  .safety strong{color:#fff}
+  .safety a{color:#ffe1b0}
+  .quick-exit{background:#c0392b;color:#fff;border:0;font-weight:700;font-size:.82rem;
+    padding:7px 14px;border-radius:4px;cursor:pointer;letter-spacing:.02em;white-space:nowrap}
+  .quick-exit:hover{background:#a5301f}
+
+  /* Header */
+  header.site{position:sticky;top:0;z-index:20;background:rgba(250,246,240,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:Georgia,serif;font-weight:700;font-size:1.25rem;color:var(--ink)}
+  .brand:hover{text-decoration:none}
+  .logo{width:34px;height:34px;background:var(--green);border-radius:8px 8px 8px 0;position:relative;flex:none}
+  .logo::after{content:"";position:absolute;inset:9px;border:2px solid #fff;border-bottom:0;border-radius:5px 5px 0 0}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{color:var(--ink);font-size:.95rem;font-weight:500}
+  .nav-links a:hover{color:var(--green)}
+  @media(max-width:840px){.nav-links{display:none}}
+
+  /* Hero */
+  .hero{position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch}
+  .hero-copy{padding:clamp(48px,7vw,88px) clamp(24px,4vw,64px) clamp(48px,7vw,88px) 0}
+  .hero-copy .eyebrow{color:var(--amber);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}
+  .hero-copy p.lede{font-size:1.2rem;max-width:46ch;margin-top:18px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .hero-note{font-size:.82rem;color:var(--muted);margin-top:18px}
+  .hero-note kbd{background:var(--sand);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.78rem}
+  .hero-img{background-image:url('images/hero.jpg');background-size:cover;background-position:center;min-height:420px;border-left:4px solid var(--amber)}
+  @media(max-width:840px){.hero-grid{grid-template-columns:1fr}.hero-copy{padding:48px 24px}.hero-img{min-height:280px;border-left:0;border-top:4px solid var(--amber)}}
+
+  /* Impact strip */
+  .impact{background:var(--green);color:#eaf3f0}
+  .impact .grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .impact .stat{padding:34px 20px;border-left:1px solid rgba(255,255,255,.16);text-align:center}
+  .impact .stat:first-child{border-left:0}
+  .impact .num{font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:#fff;line-height:1}
+  .impact .lbl{font-size:.82rem;letter-spacing:.04em;margin-top:8px;color:#cfe4de}
+  @media(max-width:680px){.impact .grid{grid-template-columns:repeat(2,1fr)}.impact .stat:nth-child(3){border-left:0}.impact .stat{border-top:1px solid rgba(255,255,255,.16)}.impact .stat:nth-child(1),.impact .stat:nth-child(2){border-top:0}}
+
+  section{padding:clamp(56px,8vw,96px) 0}
+  .section-head{max-width:640px;margin-bottom:40px}
+  .section-head .eyebrow{color:var(--amber);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+
+  /* Programs */
+  .programs{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .prog{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+  .prog .band{height:8px}
+  .prog.vets .band{background:var(--green)}
+  .prog.women .band{background:var(--amber)}
+  .prog .body{padding:32px}
+  .prog h3{margin-bottom:10px}
+  .prog ul{margin:16px 0 0;padding-left:18px;color:var(--muted)}
+  .prog li{margin-bottom:7px}
+  @media(max-width:760px){.programs{grid-template-columns:1fr}}
+
+  /* Ways to help */
+  .help{background:var(--sand)}
+  .ways{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .way{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:30px}
+  .way h3{margin-bottom:8px}
+  .way .ico{width:44px;height:44px;border-radius:8px;background:var(--green);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;margin-bottom:16px}
+  .way.b .ico{background:var(--amber)}
+  @media(max-width:760px){.ways{grid-template-columns:1fr}}
+
+  /* Donate band */
+  .donate-band{background:var(--green-dk);color:#eaf3f0}
+  .donate-band .inner{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+  .donate-band h2{color:#fff;max-width:20ch}
+  .donate-band p{color:#cfe4de;margin:8px 0 0;max-width:48ch}
+
+  /* Trust */
+  .trust{display:grid;grid-template-columns:1.2fr 1fr;gap:44px;align-items:center}
+  .trust .badges{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px}
+  .badge{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 16px;font-size:.85rem;font-weight:600;color:var(--ink)}
+  .allocation{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px}
+  .bar{height:14px;background:var(--sand);border-radius:7px;overflow:hidden;margin:6px 0 4px}
+  .bar span{display:block;height:100%;background:var(--green)}
+  .alloc-row{margin-bottom:18px}
+  .alloc-row .top{display:flex;justify-content:space-between;font-size:.9rem;font-weight:600}
+  @media(max-width:760px){.trust{grid-template-columns:1fr}}
+
+  /* Footer */
+  footer.site{background:#1a2623;color:#c4d3ce;padding:52px 0 30px;font-size:.92rem}
+  footer.site .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+  footer.site h4{color:#fff;font-family:inherit;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 14px}
+  footer.site a{color:#c4d3ce}
+  footer.site a:hover{color:#fff}
+  .foot-crisis{background:rgba(192,57,43,.18);border:1px solid rgba(192,57,43,.4);border-radius:6px;padding:14px 16px;margin-top:18px;color:#f0d6d0;font-size:.86rem}
+  .foot-base{border-top:1px solid rgba(255,255,255,.12);margin-top:34px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.82rem;color:#8ea19b}
+  @media(max-width:760px){footer.site .cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+  <!-- Safety / crisis bar -->
+  <div class="safety">
+    <div class="container">
+      <span>In immediate danger, call <strong>911</strong> · 24/7 Domestic Violence Hotline <a href="tel:18007997233"><strong>1-800-799-7233</strong></a> · Veterans Crisis Line <a href="tel:988"><strong>988, press 1</strong></a></span>
+      <button class="quick-exit" onclick="quickExit()" title="Leaves this site immediately (or press Escape)">Quick exit ✕</button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site">
+    <div class="container nav">
+      <a href="#" class="brand"><span class="logo" aria-hidden="true"></span>Homefront Haven</a>
+      <nav class="nav-links">
+        <a href="#mission">Our mission</a>
+        <a href="#programs">Programs</a>
+        <a href="#help">Get involved</a>
+        <a href="#trust">Transparency</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a href="#donate" class="btn btn-donate">Donate</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="mission">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Homeless veterans · Survivors of abuse</p>
+          <h1>Everyone deserves a door that locks and a place to call home.</h1>
+          <p class="lede">Homefront Haven builds affordable, permanent housing — and the support that comes with it — for veterans experiencing homelessness and for women and children escaping abuse.</p>
+          <div class="hero-cta">
+            <a href="#donate" class="btn btn-donate">Donate now</a>
+            <a href="#help" class="btn btn-outline">Get help &amp; find housing</a>
+          </div>
+          <p class="hero-note">Your safety matters. Press <kbd>Esc</kbd> at any time to leave this site quickly.</p>
+        </div>
+        <div class="hero-img" role="img" aria-label="A welcoming home porch with a HELLO doormat"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact -->
+  <div class="impact">
+    <div class="container">
+      <div class="grid">
+        <div class="stat"><div class="num">128</div><div class="lbl">Homes built &amp; placed</div></div>
+        <div class="stat"><div class="num">340+</div><div class="lbl">Veterans housed</div></div>
+        <div class="stat"><div class="num">210</div><div class="lbl">Women &amp; children safe</div></div>
+        <div class="stat"><div class="num">92%</div><div class="lbl">Still housed after 2 years</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Programs -->
+  <section id="programs">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What we do</p>
+        <h2>Two communities. One promise: a safe, permanent home.</h2>
+      </div>
+      <div class="programs">
+        <div class="prog vets">
+          <div class="band"></div>
+          <div class="body">
+            <h3>Housing for veterans</h3>
+            <p>Permanent, supportive homes for veterans leaving homelessness — paired with the services that help them stay housed for good.</p>
+            <ul>
+              <li>Move-in ready, genuinely affordable homes</li>
+              <li>Benefits navigation and employment support</li>
+              <li>On-site mental-health and peer support</li>
+            </ul>
+          </div>
+        </div>
+        <div class="prog women">
+          <div class="band"></div>
+          <div class="body">
+            <h3>Safe housing for women &amp; children</h3>
+            <p>Confidential, secure housing for women and children rebuilding their lives after abuse, with trauma-informed support every step of the way.</p>
+            <ul>
+              <li>Undisclosed, secure locations</li>
+              <li>Trauma-informed case management</li>
+              <li>Childcare, schooling and legal advocacy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ways to help -->
+  <section class="help" id="help">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Get involved</p>
+        <h2>It takes a community to build a home.</h2>
+      </div>
+      <div class="ways">
+        <div class="way a">
+          <div class="ico">♥</div>
+          <h3>Give</h3>
+          <p>A one-time or monthly gift funds materials, land and the wraparound support that keeps people housed.</p>
+          <a href="#donate" class="btn btn-primary" style="margin-top:8px">Donate</a>
+        </div>
+        <div class="way b">
+          <div class="ico">✋</div>
+          <h3>Volunteer</h3>
+          <p>Build days, mentoring, admin, skilled trades — every pair of hands moves a family closer to home.</p>
+          <a href="#contact" class="btn btn-outline" style="margin-top:8px">Volunteer</a>
+        </div>
+        <div class="way a">
+          <div class="ico">⌂</div>
+          <h3>Partner</h3>
+          <p>Employers, builders, landlords and congregations — partner with us to house more people, faster.</p>
+          <a href="#contact" class="btn btn-outline" style="margin-top:8px">Partner with us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donate band -->
+  <div class="donate-band" id="donate">
+    <div class="container inner" style="padding-top:56px;padding-bottom:56px">
+      <div>
+        <h2>$40 a month keeps a family's lights on and door locked.</h2>
+        <p>Every gift goes straight into homes and the support that makes them last. Give once, or become a monthly Haven Builder.</p>
+      </div>
+      <a href="#" class="btn btn-donate" style="font-size:1.05rem;padding:16px 30px">Donate now →</a>
+    </div>
+  </div>
+
+  <!-- Trust -->
+  <section id="trust">
+    <div class="container trust">
+      <div>
+        <p class="eyebrow" style="color:var(--amber);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px">Your trust, earned</p>
+        <h2>Where your money goes — in plain sight.</h2>
+        <p>We're a registered 501(c)(3) nonprofit. We publish our finances, our board and our outcomes, because the people who fund this work deserve to see it.</p>
+        <div class="badges">
+          <span class="badge">501(c)(3) nonprofit</span>
+          <span class="badge">Annual report published</span>
+          <span class="badge">Independently audited</span>
+        </div>
+      </div>
+      <div class="allocation">
+        <div class="alloc-row">
+          <div class="top"><span>Housing &amp; programs</span><span>87¢</span></div>
+          <div class="bar"><span style="width:87%"></span></div>
+        </div>
+        <div class="alloc-row">
+          <div class="top"><span>Support services</span><span>9¢</span></div>
+          <div class="bar"><span style="width:9%"></span></div>
+        </div>
+        <div class="alloc-row" style="margin-bottom:0">
+          <div class="top"><span>Admin &amp; fundraising</span><span>4¢</span></div>
+          <div class="bar"><span style="width:4%"></span></div>
+        </div>
+        <p style="font-size:.82rem;margin:16px 0 0">Of every dollar donated in the last fiscal year.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site" id="contact">
+    <div class="container">
+      <div class="cols">
+        <div>
+          <a href="#" class="brand" style="color:#fff"><span class="logo" aria-hidden="true"></span>Homefront Haven</a>
+          <p style="color:#c4d3ce;margin-top:14px;max-width:34ch">Building safe, permanent homes for veterans and survivors of abuse.</p>
+          <div class="foot-crisis">If you're in danger now, call <strong>911</strong>. DV Hotline: <a href="tel:18007997233">1-800-799-7233</a> · Veterans Crisis Line: <a href="tel:988">988, press 1</a>.</div>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <p style="margin:0;line-height:2.1">
+            <a href="#mission">Our mission</a><br>
+            <a href="#programs">Programs</a><br>
+            <a href="#help">Get involved</a><br>
+            <a href="#trust">Transparency</a>
+          </p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p style="margin:0;line-height:2.1;color:#c4d3ce">
+            <a href="mailto:hello@homefronthaven.org">hello@homefronthaven.org</a><br>
+            (704) 555-0180<br>
+            Mon–Fri, 9am–5pm
+          </p>
+        </div>
+      </div>
+      <div class="foot-base">
+        <span>© 2026 Homefront Haven · 501(c)(3) EIN 00-0000000</span>
+        <span>Concept mockup · not a live organization</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Quick Exit: leave the site immediately and don't leave it in Back history.
+    function quickExit(){
+      try{ window.open('https://www.google.com','_blank'); }catch(e){}
+      window.location.replace('https://weather.com');
+    }
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){ quickExit(); }
+    });
+  </script>
+</body>
+</html>
