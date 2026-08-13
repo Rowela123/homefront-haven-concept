@@ -4,336 +4,339 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Homefront Haven — Safe homes for veterans and survivors</title>
-<meta name="description" content="Homefront Haven builds affordable, permanent housing for homeless veterans and for women and children escaping abuse." />
+<meta name="description" content="Homefront Haven builds affordable, permanent homes for veterans leaving homelessness and for women and children escaping abuse." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Caveat:wght@600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#faf6f0; --surface:#ffffff; --ink:#22312e; --muted:#5c6b66;
-    --line:#e7ded2; --green:#20655a; --green-dk:#184e46; --sand:#efe7d9;
-    --amber:#c2703d; --amber-dk:#a95c2d; --maxw:1120px;
+    --paper:#f6efe3; --paper-2:#efe6d5; --panel:#fbf6ec;
+    --ink:#211d18; --ink-soft:#463d33; --muted:#6f6558; --line:#ddceb6;
+    --clay:#ab4f2a; --clay-dk:#8a3f20; --pine:#2f574a; --pine-dk:#21433a;
+    --maxw:1140px;
+    --serif:'Calistoga',Georgia,serif; --sans:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
-  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;line-height:1.15;letter-spacing:-.01em;margin:0}
-  h1{font-size:clamp(2.2rem,5vw,3.4rem)}
-  h2{font-size:clamp(1.6rem,3vw,2.2rem)}
-  h3{font-size:1.2rem}
-  p{margin:0 0 1rem;color:var(--muted)}
-  a{color:var(--green);text-decoration:none}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  /* faint paper grain */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")}
+  h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spacing:-.01em;margin:0;color:var(--ink)}
+  h1{font-size:clamp(2.7rem,6.2vw,5rem)}
+  h2{font-size:clamp(1.9rem,3.6vw,2.9rem)}
+  h3{font-size:1.4rem}
+  p{margin:0 0 1.05rem;color:var(--ink-soft)}
+  a{color:var(--clay);text-decoration:none}
   a:hover{text-decoration:underline}
-  .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.95rem;
-    padding:13px 24px;border-radius:4px;border:1.5px solid transparent;cursor:pointer;transition:.15s}
-  .btn-donate{background:var(--amber);color:#fff}
-  .btn-donate:hover{background:var(--amber-dk);text-decoration:none}
-  .btn-primary{background:var(--green);color:#fff}
-  .btn-primary:hover{background:var(--green-dk);text-decoration:none}
-  .btn-outline{background:transparent;border-color:var(--green);color:var(--green)}
-  .btn-outline:hover{background:var(--green);color:#fff;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px;position:relative;z-index:2}
+  .kicker{font-family:var(--sans);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--clay)}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:.95rem;
+    padding:14px 26px;border:2px solid transparent;cursor:pointer;transition:.15s}
+  .btn svg{width:17px;height:17px}
+  .btn-clay{background:var(--clay);color:#fff}
+  .btn-clay:hover{background:var(--clay-dk);text-decoration:none}
+  .btn-ink{background:var(--ink);color:var(--paper)}
+  .btn-ink:hover{background:#000;text-decoration:none}
+  .btn-ghost{background:transparent;border-color:var(--ink);color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);text-decoration:none}
 
   /* Safety bar */
-  .safety{background:var(--green-dk);color:#eaf1ef;font-size:.86rem}
-  .safety .container{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
-  .safety strong{color:#fff}
-  .safety a{color:#ffe1b0}
-  .quick-exit{background:#c0392b;color:#fff;border:0;font-weight:700;font-size:.82rem;
-    padding:7px 14px;border-radius:4px;cursor:pointer;letter-spacing:.02em;white-space:nowrap}
-  .quick-exit:hover{background:#a5301f}
+  .safety{background:var(--ink);color:#e9e0d2;font-family:var(--sans);font-size:.83rem;position:relative;z-index:3}
+  .safety .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px}
+  .safety a{color:#f2c9a6}
+  .safety .lines{display:flex;gap:6px 18px;flex-wrap:wrap}
+  .quick-exit{display:inline-flex;align-items:center;gap:7px;background:var(--clay);color:#fff;border:0;font-family:var(--sans);
+    font-weight:700;font-size:.8rem;padding:7px 13px;cursor:pointer;white-space:nowrap}
+  .quick-exit:hover{background:var(--clay-dk)}
+  .quick-exit svg{width:14px;height:14px}
 
   /* Header */
-  header.site{position:sticky;top:0;z-index:20;background:rgba(250,246,240,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
-  .brand{display:flex;align-items:center;gap:11px;font-family:Georgia,serif;font-weight:700;font-size:1.25rem;color:var(--ink)}
+  header.site{position:sticky;top:0;z-index:20;background:rgba(246,239,227,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
+  .brand{font-family:var(--serif);font-size:1.5rem;color:var(--ink);display:flex;align-items:center;gap:10px}
   .brand:hover{text-decoration:none}
-  .logo{width:34px;height:34px;background:var(--green);border-radius:8px 8px 8px 0;position:relative;flex:none}
-  .logo::after{content:"";position:absolute;inset:9px;border:2px solid #fff;border-bottom:0;border-radius:5px 5px 0 0}
-  .nav-links{display:flex;gap:26px;align-items:center}
-  .nav-links a{color:var(--ink);font-size:.95rem;font-weight:500}
-  .nav-links a:hover{color:var(--green)}
-  @media(max-width:840px){.nav-links{display:none}}
+  .brand .mk{width:16px;height:22px;background:var(--clay);clip-path:polygon(50% 0,100% 38%,100% 100%,0 100%,0 38%);display:inline-block}
+  .nav-links{display:flex;gap:30px;align-items:center;font-family:var(--sans)}
+  .nav-links a{color:var(--ink);font-size:.94rem;font-weight:500}
+  .nav-links a:hover{color:var(--clay)}
+  @media(max-width:900px){.nav-links{display:none}}
 
-  /* Hero */
-  .hero{position:relative}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch}
-  .hero-copy{padding:clamp(48px,7vw,88px) clamp(24px,4vw,64px) clamp(48px,7vw,88px) 0}
-  .hero-copy .eyebrow{color:var(--amber);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}
-  .hero-copy p.lede{font-size:1.2rem;max-width:46ch;margin-top:18px}
-  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-  .hero-note{font-size:.82rem;color:var(--muted);margin-top:18px}
-  .hero-note kbd{background:var(--sand);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.78rem}
-  .hero-img{background-image:url('images/hero.jpg');background-size:cover;background-position:center;min-height:420px;border-left:4px solid var(--amber)}
-  @media(max-width:840px){.hero-grid{grid-template-columns:1fr}.hero-copy{padding:48px 24px}.hero-img{min-height:280px;border-left:0;border-top:4px solid var(--amber)}}
+  /* Hero — asymmetric, overlapping */
+  .hero{padding:clamp(40px,6vw,80px) 0 0}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:stretch}
+  .hero h1{margin-bottom:22px}
+  .hero .sub{font-size:1.22rem;color:var(--ink-soft);max-width:34ch}
+  .hero .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+  .hero .safenote{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:20px}
+  .hero .safenote kbd{font-family:var(--sans);background:var(--paper-2);border:1px solid var(--line);padding:1px 7px;font-size:.76rem}
+  .hero-fig{position:relative;margin-bottom:-1px;display:flex}
+  .hero-fig img{width:100%;height:100%;object-fit:cover;display:block;border:1px solid var(--line);max-height:540px}
+  .hero-fig .tag{position:absolute;left:-14px;top:22px;background:var(--pine);color:#eaf1ee;font-family:var(--sans);
+    font-size:.76rem;font-weight:600;letter-spacing:.03em;padding:8px 13px;transform:rotate(-2deg)}
+  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:30px}.hero .sub{max-width:none}}
 
-  /* Impact strip */
-  .impact{background:var(--green);color:#eaf3f0}
-  .impact .grid{display:grid;grid-template-columns:repeat(4,1fr)}
-  .impact .stat{padding:34px 20px;border-left:1px solid rgba(255,255,255,.16);text-align:center}
-  .impact .stat:first-child{border-left:0}
-  .impact .num{font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:#fff;line-height:1}
-  .impact .lbl{font-size:.82rem;letter-spacing:.04em;margin-top:8px;color:#cfe4de}
-  @media(max-width:680px){.impact .grid{grid-template-columns:repeat(2,1fr)}.impact .stat:nth-child(3){border-left:0}.impact .stat{border-top:1px solid rgba(255,255,255,.16)}.impact .stat:nth-child(1),.impact .stat:nth-child(2){border-top:0}}
+  /* Founder note */
+  .note{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:70px}
+  .note .wrap{padding:clamp(52px,7vw,84px) 30px;max-width:860px}
+  .note p.quote{font-family:var(--serif);font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.32;color:var(--ink);margin:0 0 26px}
+  .note .sign{font-family:'Caveat',cursive;font-size:2rem;color:var(--clay);line-height:1}
+  .note .who{font-family:var(--sans);font-size:.9rem;color:var(--muted);margin-top:4px}
 
-  section{padding:clamp(56px,8vw,96px) 0}
-  .section-head{max-width:640px;margin-bottom:40px}
-  .section-head .eyebrow{color:var(--amber);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+  /* Programs — alternating editorial rows */
+  .prog{padding:clamp(56px,8vw,104px) 0}
+  .prog .row{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .prog .row.flip .fig{order:2}
+  .prog .fig img{width:100%;height:auto;display:block;border:1px solid var(--line)}
+  .prog .body .kicker{display:block;margin-bottom:14px}
+  .prog .body h2{margin-bottom:16px;max-width:15ch}
+  .prog .body .list{margin:20px 0 0;padding:0;list-style:none}
+  .prog .body .list li{position:relative;padding-left:22px;margin-bottom:11px;color:var(--ink-soft)}
+  .prog .body .list li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;background:var(--clay)}
+  .prog .row.vets .body .list li::before{background:var(--pine)}
+  .prog .sep{height:1px;background:var(--line);margin:clamp(48px,7vw,88px) 0}
+  @media(max-width:820px){.prog .row{grid-template-columns:1fr;gap:26px}.prog .row.flip .fig{order:0}}
 
-  /* Programs */
-  .programs{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-  .prog{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
-  .prog .band{height:8px}
-  .prog.vets .band{background:var(--green)}
-  .prog.women .band{background:var(--amber)}
-  .prog .body{padding:32px}
-  .prog h3{margin-bottom:10px}
-  .prog ul{margin:16px 0 0;padding-left:18px;color:var(--muted)}
-  .prog li{margin-bottom:7px}
-  @media(max-width:760px){.programs{grid-template-columns:1fr}}
+  /* Numbers — dark, asymmetric */
+  .nums{background:var(--ink);color:var(--paper)}
+  .nums .wrap{padding:clamp(56px,8vw,96px) 30px;display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+  .nums .big{font-family:var(--serif);font-size:clamp(4.5rem,11vw,8.5rem);line-height:.9;color:#fff}
+  .nums .big span{color:var(--clay)}
+  .nums .big small{display:block;font-family:var(--sans);font-size:.92rem;font-weight:500;letter-spacing:.02em;color:#c7bca9;margin-top:14px}
+  .nums .side{display:grid;gap:22px}
+  .nums .side .n{font-family:var(--serif);font-size:2.4rem;color:#fff;line-height:1}
+  .nums .side .l{font-family:var(--sans);font-size:.92rem;color:#c7bca9;margin-top:4px}
+  .nums .side .item{border-left:2px solid var(--clay);padding-left:18px}
+  @media(max-width:820px){.nums .wrap{grid-template-columns:1fr;gap:34px}}
 
-  /* Ways to help */
-  .help{background:var(--sand)}
-  .ways{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .way{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:30px}
-  .way h3{margin-bottom:8px}
-  .way .ico{width:44px;height:44px;border-radius:8px;background:var(--green);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;margin-bottom:16px}
-  .way.b .ico{background:var(--amber)}
-  @media(max-width:760px){.ways{grid-template-columns:1fr}}
+  /* Transparency */
+  .trust{padding:clamp(56px,8vw,104px) 0}
+  .trust .wrap{max-width:820px}
+  .trust h2{margin-bottom:18px}
+  .trust .alloc{margin:30px 0 0}
+  .trust .arow{margin-bottom:20px}
+  .trust .arow .top{display:flex;justify-content:space-between;font-family:var(--sans);font-weight:600;font-size:.95rem;margin-bottom:7px}
+  .trust .bar{height:12px;background:var(--paper-2);border:1px solid var(--line)}
+  .trust .bar span{display:block;height:100%;background:var(--pine)}
+  .trust .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .badge{font-family:var(--sans);font-size:.84rem;font-weight:600;border:1px solid var(--line);background:var(--panel);padding:9px 15px}
 
-  /* Donate band */
-  .donate-band{background:var(--green-dk);color:#eaf3f0}
-  .donate-band .inner{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
-  .donate-band h2{color:#fff;max-width:20ch}
-  .donate-band p{color:#cfe4de;margin:8px 0 0;max-width:48ch}
-
-  /* Trust */
-  .trust{display:grid;grid-template-columns:1.2fr 1fr;gap:44px;align-items:center}
-  .trust .badges{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px}
-  .badge{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 16px;font-size:.85rem;font-weight:600;color:var(--ink)}
-  .allocation{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px}
-  .bar{height:14px;background:var(--sand);border-radius:7px;overflow:hidden;margin:6px 0 4px}
-  .bar span{display:block;height:100%;background:var(--green)}
-  .alloc-row{margin-bottom:18px}
-  .alloc-row .top{display:flex;justify-content:space-between;font-size:.9rem;font-weight:600}
-  @media(max-width:760px){.trust{grid-template-columns:1fr}}
+  /* Donate */
+  .donate{background:var(--clay);color:#fff}
+  .donate .wrap{padding:clamp(52px,7vw,88px) 30px;display:grid;grid-template-columns:1.3fr .7fr;gap:36px;align-items:center}
+  .donate h2{color:#fff;max-width:20ch;margin-bottom:12px}
+  .donate p{color:#f6ded1;margin:0;max-width:46ch}
+  .donate .act{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .donate .btn-ink{background:#fff;color:var(--clay)}
+  .donate .btn-ink:hover{background:#211d18;color:#fff}
+  .donate .small{font-family:var(--sans);font-size:.82rem;color:#f3d3c3}
+  @media(max-width:760px){.donate .wrap{grid-template-columns:1fr;gap:22px}}
 
   /* Footer */
-  footer.site{background:#1a2623;color:#c4d3ce;padding:52px 0 30px;font-size:.92rem}
-  footer.site .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
-  footer.site h4{color:#fff;font-family:inherit;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 14px}
-  footer.site a{color:#c4d3ce}
-  footer.site a:hover{color:#fff}
-  .foot-crisis{background:rgba(192,57,43,.18);border:1px solid rgba(192,57,43,.4);border-radius:6px;padding:14px 16px;margin-top:18px;color:#f0d6d0;font-size:.86rem}
-  .foot-base{border-top:1px solid rgba(255,255,255,.12);margin-top:34px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.82rem;color:#8ea19b}
+  footer.site{background:#1b1712;color:#b8ab98;font-family:var(--sans);font-size:.92rem;padding:56px 0 30px}
+  footer.site .cols{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:32px}
+  footer.site h4{color:#fff;font-family:var(--sans);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px;font-weight:700}
+  footer.site a{color:#d9cdb9}
+  footer.site .fbrand{font-family:var(--serif);font-size:1.5rem;color:#fff}
+  .safenote-foot{background:rgba(171,79,42,.18);border:1px solid rgba(171,79,42,.5);padding:13px 15px;margin-top:16px;color:#e8cbb9;font-size:.85rem;max-width:34ch}
+  .foot-base{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.82rem;color:#8a7d6b}
   @media(max-width:760px){footer.site .cols{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-  <!-- Safety / crisis bar -->
+  <!-- Safety bar -->
   <div class="safety">
-    <div class="container">
-      <span>In immediate danger, call <strong>911</strong> · 24/7 Domestic Violence Hotline <a href="tel:18007997233"><strong>1-800-799-7233</strong></a> · Veterans Crisis Line <a href="tel:988"><strong>988, press 1</strong></a></span>
-      <button class="quick-exit" onclick="quickExit()" title="Leaves this site immediately (or press Escape)">Quick exit ✕</button>
+    <div class="wrap">
+      <div class="lines">
+        <span>In danger now? Call <a href="tel:911"><strong>911</strong></a>.</span>
+        <span>Domestic Violence Hotline <a href="tel:18007997233"><strong>1-800-799-7233</strong></a></span>
+        <span>Veterans Crisis Line <a href="tel:988"><strong>988, press 1</strong></a></span>
+      </div>
+      <button class="quick-exit" onclick="quickExit()" title="Leave this site now (or press Escape)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        Quick exit
+      </button>
     </div>
   </div>
 
   <!-- Header -->
   <header class="site">
-    <div class="container nav">
-      <a href="#" class="brand"><span class="logo" aria-hidden="true"></span>Homefront Haven</a>
+    <div class="wrap nav">
+      <a href="#top" class="brand"><span class="mk" aria-hidden="true"></span>Homefront Haven</a>
       <nav class="nav-links">
-        <a href="#mission">Our mission</a>
-        <a href="#programs">Programs</a>
-        <a href="#help">Get involved</a>
-        <a href="#trust">Transparency</a>
+        <a href="#programs">What we do</a>
+        <a href="#numbers">Our work</a>
+        <a href="#trust">Where money goes</a>
         <a href="#contact">Contact</a>
       </nav>
-      <a href="#donate" class="btn btn-donate">Donate</a>
+      <a href="#donate" class="btn btn-clay">Donate</a>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="hero" id="mission">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Homeless veterans · Survivors of abuse</p>
-          <h1>Everyone deserves a door that locks and a place to call home.</h1>
-          <p class="lede">Homefront Haven builds affordable, permanent housing — and the support that comes with it — for veterans experiencing homelessness and for women and children escaping abuse.</p>
-          <div class="hero-cta">
-            <a href="#donate" class="btn btn-donate">Donate now</a>
-            <a href="#help" class="btn btn-outline">Get help &amp; find housing</a>
-          </div>
-          <p class="hero-note">Your safety matters. Press <kbd>Esc</kbd> at any time to leave this site quickly.</p>
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <h1>A door that locks,<br>and a home<br>that is yours.</h1>
+        <p class="sub">We build affordable, permanent homes for veterans coming off the street and for women and children leaving abuse. Then we stay in their corner.</p>
+        <div class="acts">
+          <a href="#donate" class="btn btn-clay">Donate</a>
+          <a href="#contact" class="btn btn-ghost">Find housing or help</a>
         </div>
-        <div class="hero-img" role="img" aria-label="A welcoming home porch with a HELLO doormat"></div>
+        <p class="safenote">Being watched? Press <kbd>Esc</kbd> at any time to leave this site fast.</p>
       </div>
+      <figure class="hero-fig">
+        <span class="tag">Move-in day, Charlotte</span>
+        <img src="images/hero.jpg" alt="A welcoming home porch with rocking chairs and a HELLO doormat" />
+      </figure>
     </div>
   </section>
 
-  <!-- Impact -->
-  <div class="impact">
-    <div class="container">
-      <div class="grid">
-        <div class="stat"><div class="num">128</div><div class="lbl">Homes built &amp; placed</div></div>
-        <div class="stat"><div class="num">340+</div><div class="lbl">Veterans housed</div></div>
-        <div class="stat"><div class="num">210</div><div class="lbl">Women &amp; children safe</div></div>
-        <div class="stat"><div class="num">92%</div><div class="lbl">Still housed after 2 years</div></div>
-      </div>
+  <!-- Founder note -->
+  <section class="note">
+    <div class="wrap">
+      <p class="quote">"We started Homefront Haven after a man we knew, twelve years in the Army, spent a winter in his car three miles from the base he served on. Housing is not complicated. People need a place that is theirs, a door that locks, and someone who picks up the phone. That is the whole job."</p>
+      <div class="sign">Dana Whitfield</div>
+      <div class="who">Dana Whitfield, founder and a veteran herself</div>
     </div>
-  </div>
+  </section>
 
   <!-- Programs -->
-  <section id="programs">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">What we do</p>
-        <h2>Two communities. One promise: a safe, permanent home.</h2>
+  <section class="prog" id="programs">
+    <div class="wrap">
+
+      <div class="row vets">
+        <figure class="fig"><img src="images/keys.jpg" alt="A hand holding keys to a new home" /></figure>
+        <div class="body">
+          <span class="kicker">For veterans</span>
+          <h2>Homes for veterans leaving the street.</h2>
+          <p>Permanent, genuinely affordable homes for veterans coming out of homelessness, with the practical help that keeps them housed for good.</p>
+          <ul class="list">
+            <li>Move-in ready homes they can actually afford</li>
+            <li>Help sorting VA benefits and finding work</li>
+            <li>Peer support from other veterans who have been there</li>
+          </ul>
+        </div>
       </div>
-      <div class="programs">
-        <div class="prog vets">
-          <div class="band"></div>
-          <div class="body">
-            <h3>Housing for veterans</h3>
-            <p>Permanent, supportive homes for veterans leaving homelessness — paired with the services that help them stay housed for good.</p>
-            <ul>
-              <li>Move-in ready, genuinely affordable homes</li>
-              <li>Benefits navigation and employment support</li>
-              <li>On-site mental-health and peer support</li>
-            </ul>
-          </div>
+
+      <div class="sep"></div>
+
+      <div class="row flip">
+        <figure class="fig"><img src="images/room.jpg" alt="A quiet, sunlit living room" /></figure>
+        <div class="body">
+          <span class="kicker">For women and children</span>
+          <h2>Safe housing, at an address we never publish.</h2>
+          <p>Confidential homes for women and children leaving abuse. The locations stay private, and the support covers the things that actually matter when you are starting over.</p>
+          <ul class="list">
+            <li>Secure homes at undisclosed locations</li>
+            <li>School places and childcare sorted quickly</li>
+            <li>Legal advocacy to help you stay safe</li>
+          </ul>
         </div>
-        <div class="prog women">
-          <div class="band"></div>
-          <div class="body">
-            <h3>Safe housing for women &amp; children</h3>
-            <p>Confidential, secure housing for women and children rebuilding their lives after abuse, with trauma-informed support every step of the way.</p>
-            <ul>
-              <li>Undisclosed, secure locations</li>
-              <li>Trauma-informed case management</li>
-              <li>Childcare, schooling and legal advocacy</li>
-            </ul>
-          </div>
-        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Numbers -->
+  <section class="nums" id="numbers">
+    <div class="wrap">
+      <div class="big">
+        128<span>.</span>
+        <small>homes built and handed over since 2019</small>
+      </div>
+      <div class="side">
+        <div class="item"><div class="n">340+</div><div class="l">veterans housed across the Carolinas</div></div>
+        <div class="item"><div class="n">210</div><div class="l">women and children moved somewhere safe</div></div>
+        <div class="item"><div class="n">9 in 10</div><div class="l">still in their home two years on</div></div>
       </div>
     </div>
   </section>
 
-  <!-- Ways to help -->
-  <section class="help" id="help">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Get involved</p>
-        <h2>It takes a community to build a home.</h2>
-      </div>
-      <div class="ways">
-        <div class="way a">
-          <div class="ico">♥</div>
-          <h3>Give</h3>
-          <p>A one-time or monthly gift funds materials, land and the wraparound support that keeps people housed.</p>
-          <a href="#donate" class="btn btn-primary" style="margin-top:8px">Donate</a>
-        </div>
-        <div class="way b">
-          <div class="ico">✋</div>
-          <h3>Volunteer</h3>
-          <p>Build days, mentoring, admin, skilled trades — every pair of hands moves a family closer to home.</p>
-          <a href="#contact" class="btn btn-outline" style="margin-top:8px">Volunteer</a>
-        </div>
-        <div class="way a">
-          <div class="ico">⌂</div>
-          <h3>Partner</h3>
-          <p>Employers, builders, landlords and congregations — partner with us to house more people, faster.</p>
-          <a href="#contact" class="btn btn-outline" style="margin-top:8px">Partner with us</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Donate band -->
-  <div class="donate-band" id="donate">
-    <div class="container inner" style="padding-top:56px;padding-bottom:56px">
-      <div>
-        <h2>$40 a month keeps a family's lights on and door locked.</h2>
-        <p>Every gift goes straight into homes and the support that makes them last. Give once, or become a monthly Haven Builder.</p>
-      </div>
-      <a href="#" class="btn btn-donate" style="font-size:1.05rem;padding:16px 30px">Donate now →</a>
-    </div>
-  </div>
-
-  <!-- Trust -->
-  <section id="trust">
-    <div class="container trust">
-      <div>
-        <p class="eyebrow" style="color:var(--amber);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px">Your trust, earned</p>
-        <h2>Where your money goes — in plain sight.</h2>
-        <p>We're a registered 501(c)(3) nonprofit. We publish our finances, our board and our outcomes, because the people who fund this work deserve to see it.</p>
-        <div class="badges">
-          <span class="badge">501(c)(3) nonprofit</span>
-          <span class="badge">Annual report published</span>
-          <span class="badge">Independently audited</span>
-        </div>
-      </div>
-      <div class="allocation">
-        <div class="alloc-row">
-          <div class="top"><span>Housing &amp; programs</span><span>87¢</span></div>
+  <!-- Transparency -->
+  <section class="trust" id="trust">
+    <div class="wrap">
+      <span class="kicker">Where the money goes</span>
+      <h2 style="margin-top:14px">Last year, 87 cents of every dollar went straight into homes.</h2>
+      <p>We are a registered 501(c)(3). We publish our accounts, our board and our results in full, because the people who pay for this work have every right to see it.</p>
+      <div class="alloc">
+        <div class="arow">
+          <div class="top"><span>Housing and programs</span><span>87¢</span></div>
           <div class="bar"><span style="width:87%"></span></div>
         </div>
-        <div class="alloc-row">
+        <div class="arow">
           <div class="top"><span>Support services</span><span>9¢</span></div>
           <div class="bar"><span style="width:9%"></span></div>
         </div>
-        <div class="alloc-row" style="margin-bottom:0">
-          <div class="top"><span>Admin &amp; fundraising</span><span>4¢</span></div>
+        <div class="arow">
+          <div class="top"><span>Admin and fundraising</span><span>4¢</span></div>
           <div class="bar"><span style="width:4%"></span></div>
         </div>
-        <p style="font-size:.82rem;margin:16px 0 0">Of every dollar donated in the last fiscal year.</p>
+      </div>
+      <div class="badges">
+        <span class="badge">501(c)(3) nonprofit</span>
+        <span class="badge">Accounts published yearly</span>
+        <span class="badge">Independently audited</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donate -->
+  <section class="donate" id="donate">
+    <div class="wrap">
+      <div>
+        <h2>$35 a month covers a week of rent while a family finds its feet.</h2>
+        <p>Give once, or become a monthly Haven Builder. Every dollar goes into homes and the people who make them last.</p>
+      </div>
+      <div class="act">
+        <a href="#" class="btn btn-ink">Donate now</a>
+        <span class="small">Or call (704) 555-0180 to give by phone.</span>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="site" id="contact">
-    <div class="container">
+    <div class="wrap">
       <div class="cols">
         <div>
-          <a href="#" class="brand" style="color:#fff"><span class="logo" aria-hidden="true"></span>Homefront Haven</a>
-          <p style="color:#c4d3ce;margin-top:14px;max-width:34ch">Building safe, permanent homes for veterans and survivors of abuse.</p>
-          <div class="foot-crisis">If you're in danger now, call <strong>911</strong>. DV Hotline: <a href="tel:18007997233">1-800-799-7233</a> · Veterans Crisis Line: <a href="tel:988">988, press 1</a>.</div>
+          <div class="fbrand">Homefront Haven</div>
+          <p style="margin-top:12px;max-width:32ch">Safe, permanent homes for veterans and for women and children leaving abuse. Charlotte, North Carolina.</p>
+          <div class="safenote-foot">Worried someone can see your browsing? There is a "Quick exit" button at the top, and pressing Esc leaves this site instantly.</div>
         </div>
         <div>
-          <h4>Explore</h4>
+          <h4>The work</h4>
           <p style="margin:0;line-height:2.1">
-            <a href="#mission">Our mission</a><br>
-            <a href="#programs">Programs</a><br>
-            <a href="#help">Get involved</a><br>
-            <a href="#trust">Transparency</a>
+            <a href="#programs">What we do</a><br>
+            <a href="#numbers">Our results</a><br>
+            <a href="#trust">Where money goes</a><br>
+            <a href="#donate">Donate</a>
           </p>
         </div>
         <div>
-          <h4>Contact</h4>
-          <p style="margin:0;line-height:2.1;color:#c4d3ce">
+          <h4>Reach us</h4>
+          <p style="margin:0;line-height:2.1">
             <a href="mailto:hello@homefronthaven.org">hello@homefronthaven.org</a><br>
             (704) 555-0180<br>
-            Mon–Fri, 9am–5pm
+            Monday to Friday, 9 to 5
           </p>
         </div>
       </div>
       <div class="foot-base">
         <span>© 2026 Homefront Haven · 501(c)(3) EIN 00-0000000</span>
-        <span>Concept mockup · not a live organization</span>
+        <span>Concept mockup, not a live organization</span>
       </div>
     </div>
   </footer>
 
   <script>
-    // Quick Exit: leave the site immediately and don't leave it in Back history.
     function quickExit(){
       try{ window.open('https://www.google.com','_blank'); }catch(e){}
       window.location.replace('https://weather.com');
     }
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape'){ quickExit(); }
-    });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ quickExit(); } });
   </script>
 </body>
 </html>
