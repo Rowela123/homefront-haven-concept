@@ -51,6 +51,16 @@
     font-weight:700;font-size:.8rem;padding:7px 13px;cursor:pointer;white-space:nowrap}
   .quick-exit:hover{background:var(--clay-dk)}
   .quick-exit svg{width:14px;height:14px}
+  /* persistent floating exit */
+  .qe-float{position:fixed;right:16px;bottom:16px;z-index:60;display:inline-flex;align-items:center;gap:7px;
+    background:var(--clay);color:#fff;border:0;font-family:var(--sans);font-weight:700;font-size:.82rem;
+    padding:11px 15px;cursor:pointer;box-shadow:0 6px 20px rgba(33,29,24,.28)}
+  .qe-float:hover{background:var(--clay-dk)}
+  .qe-float svg{width:15px;height:15px}
+
+  /* mobile nav toggle */
+  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+  .nav-toggle span{width:24px;height:2px;background:var(--ink);display:block}
 
   /* Header */
   header.site{position:sticky;top:0;z-index:20;background:rgba(246,239,227,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
@@ -61,7 +71,13 @@
   .nav-links{display:flex;gap:30px;align-items:center;font-family:var(--sans)}
   .nav-links a{color:var(--ink);font-size:.94rem;font-weight:500}
   .nav-links a:hover{color:var(--clay)}
-  @media(max-width:900px){.nav-links{display:none}}
+  @media(max-width:900px){
+    .nav-toggle{display:flex}
+    .nav-links{position:absolute;top:78px;left:0;right:0;flex-direction:column;gap:0;
+      background:var(--panel);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .25s ease}
+    .nav-links.open{max-height:340px}
+    .nav-links a{padding:15px 30px;border-top:1px solid var(--line);font-size:.98rem;width:100%}
+  }
 
   /* Hero — asymmetric, overlapping */
   .hero{padding:clamp(40px,6vw,80px) 0 0}
@@ -165,7 +181,8 @@
   <header class="site">
     <div class="wrap nav">
       <a href="#top" class="brand"><span class="mk" aria-hidden="true"></span>Homefront Haven</a>
-      <nav class="nav-links">
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <nav class="nav-links" id="navLinks">
         <a href="#programs">What we do</a>
         <a href="#numbers">Our work</a>
         <a href="#trust">Where money goes</a>
@@ -199,7 +216,7 @@
     <div class="wrap">
       <p class="quote">"We started Homefront Haven after a man we knew, twelve years in the Army, spent a winter in his car three miles from the base he served on. Housing is not complicated. People need a place that is theirs, a door that locks, and someone who picks up the phone. That is the whole job."</p>
       <div class="sign">Dana Whitfield</div>
-      <div class="who">Dana Whitfield, founder and a veteran herself</div>
+      <div class="who">Founder, and a veteran herself</div>
     </div>
   </section>
 
@@ -291,7 +308,7 @@
         <p>Give once, or become a monthly Haven Builder. Every dollar goes into homes and the people who make them last.</p>
       </div>
       <div class="act">
-        <a href="#" class="btn btn-ink">Donate now</a>
+        <a href="https://donorbox.org/" class="btn btn-ink">Donate now</a>
         <span class="small">Or call (704) 555-0180 to give by phone.</span>
       </div>
     </div>
@@ -331,12 +348,22 @@
     </div>
   </footer>
 
+  <!-- Persistent exit, reachable from any scroll position on every device -->
+  <button class="qe-float" onclick="quickExit()" aria-label="Quick exit — leave this site now">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    Quick exit
+  </button>
+
   <script>
-    function quickExit(){
-      try{ window.open('https://www.google.com','_blank'); }catch(e){}
-      window.location.replace('https://weather.com');
-    }
+    // Leave quietly: replace the current page so it is not left in Back history,
+    // and open no extra tab (fewer traces on a monitored device).
+    function quickExit(){ window.location.replace('https://weather.com'); }
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ quickExit(); } });
+    // Mobile menu toggle
+    (function(){
+      var t=document.getElementById('navToggle'), l=document.getElementById('navLinks');
+      if(t&&l){ t.addEventListener('click', function(){ l.classList.toggle('open'); }); }
+    })();
   </script>
 </body>
 </html>
